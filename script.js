@@ -24,20 +24,20 @@ async function loadConfig() {
                 {
                     id: "base",
                     name: "Base",
-                    pricing: { monthly: 29, yearly: 290, includedUsers: 3, additionalUserCostMonthly: 5, additionalUserCostYearly: 50, type: "base_with_additional" }
+                    pricing: { monthly: 29, yearly: 290, includedUsers: 3, additionalUserCostMonthly: 5, additionalUserCostYearly: 50, type: "base_with_additional", setupFee: 50 }
                 },
                 {
                     id: "pro", 
                     name: "Pro",
-                    pricing: { monthly: 15, yearly: 150, type: "per_user" }
+                    pricing: { monthly: 15, yearly: 150, type: "per_user", setupFee: 25 }
                 },
                 {
                     id: "enterprise",
                     name: "Enterprise", 
-                    pricing: { monthly: 299, yearly: 2990, type: "flat_rate" }
+                    pricing: { monthly: 299, yearly: 2990, type: "flat_rate", setupFee: 100 }
                 }
             ],
-            settings: { defaultUserCount: 5, minUserCount: 1 }
+            settings: { defaultUserCount: 5, minUserCount: 1, setupFeesOneTime: true }
         };
         return config;
     }
@@ -114,6 +114,9 @@ async function initApp() {
     // Initialize pricing
     updatePricing();
     
+    // Initialize total summary after all setup is complete
+    updateTotalSummary();
+    
     // Initialize animations
     initAnimations();
     
@@ -183,8 +186,7 @@ function generatePricingCards() {
                         </label>
                     </div>
                     <div class="price">
-                        <span class="currency">${config.meta?.currency || '$'}</span>
-                        <span class="amount" id="${plan.id}Price">${plan.pricing.monthly}</span>
+                        <span class="amount" id="${plan.id}Price">${formatPrice(plan.pricing.monthly)}</span>
                         <span class="period" id="${plan.id}Period">/month</span>
                     </div>
                     <p class="plan-description">${plan.description}</p>
@@ -193,12 +195,16 @@ function generatePricingCards() {
                     </div>
                     <div class="additional-cost-info${plan.pricing.type === 'base_with_additional' ? '' : ' empty'}">
                         ${plan.pricing.type === 'base_with_additional' ? 
-                            `<span id="${plan.id}AdditionalInfo" class="additional-info">+${config.meta?.currency || '$'}${plan.pricing.additionalUserCostMonthly}/user/month for additional users</span>` : 
+                            `<span id="${plan.id}AdditionalInfo" class="additional-info">+${formatCurrency(plan.pricing.additionalUserCostMonthly)}/user/month for additional users</span>` : 
                             `<span id="${plan.id}AdditionalInfo" class="additional-info placeholder">&nbsp;</span>`}
                     </div>
+                    ${plan.pricing.setupFee && plan.pricing.setupFee > 0 ? `
+                    <div class="setup-fee-info">
+                        <span class="setup-fee">Setup Fee: ${formatCurrency(plan.pricing.setupFee)} (one-time)</span>
+                    </div>` : ''}
                 </div>
                 <div class="total-price">
-                    <strong>Plan Total: ${config.meta?.currency || '$'}<span id="${plan.id}TotalPrice">${plan.pricing.monthly}</span><span id="${plan.id}TotalPeriod">/month</span></strong>
+                    <strong>Plan Total: <span id="${plan.id}TotalPrice">${formatPrice(plan.pricing.monthly)}</span><span id="${plan.id}TotalPeriod">/month</span></strong>
                 </div>
             </div>
         `;
@@ -235,15 +241,12 @@ function updateTotalSummary() {
     const selectedPlansList = document.getElementById('selectedPlansList');
     const totalCostElement = document.getElementById('totalCost');
     const totalPeriodElement = document.getElementById('totalPeriod');
-    const userCountSummary = document.getElementById('userCountSummary');
-    
-    // Update user count summary
-    userCountSummary.textContent = userCount;
-    
+        
     // Clear previous content
     selectedPlansList.innerHTML = '';
     
-    let totalCost = 0;
+    let totalRecurringCost = 0;
+    let totalSetupFee = 0;
     const period = isYearly ? 'yearly' : 'monthly';
     const periodText = isYearly ? '/year' : '/month';
     
@@ -252,26 +255,80 @@ function updateTotalSummary() {
         if (!plan) return;
         
         let planCost = calculatePlanCost(plan, userCount, isYearly);
-        totalCost += planCost;
+        totalRecurringCost += planCost;
+        
+        // Add setup fee if present
+        if (plan.pricing.setupFee && plan.pricing.setupFee > 0) {
+            totalSetupFee += plan.pricing.setupFee;
+        }
         
         // Add to selected plans list
         const planItem = document.createElement('div');
         planItem.className = 'selected-plan-item';
+        
+        const setupFeeText = plan.pricing.setupFee && plan.pricing.setupFee > 0 ? 
+            ` + ${formatCurrency(plan.pricing.setupFee)} setup` : '';
+        
         planItem.innerHTML = `
             <div class="plan-item-header">
                 <span class="plan-name">${plan.name}</span>
-                <span class="plan-cost">${config.meta?.currency || '$'}${formatPrice(planCost)}${periodText}</span>
+                <span class="plan-cost">${formatCurrency(planCost)}${periodText}${setupFeeText}</span>
             </div>
             <div class="plan-item-details">
-                <small>${getPlanCostBreakdown(plan, userCount, isYearly)}</small>
+                <small class="recurring-cost">${getPlanCostBreakdown(plan, userCount, isYearly)}</small>
+                ${plan.pricing.setupFee && plan.pricing.setupFee > 0 ? `
+                <small class="setup-fee-breakdown">Setup fee: ${formatCurrency(plan.pricing.setupFee)} (one-time)</small>` : ''}
             </div>
         `;
         selectedPlansList.appendChild(planItem);
     });
     
-    // Update total cost
-    totalCostElement.textContent = (config.meta?.currency || '$') + formatPrice(totalCost);
-    totalPeriodElement.textContent = periodText;
+    // Update total cost display with proper breakdown
+    if (totalSetupFee > 0) {
+        // Show recurring cost as main total
+        totalCostElement.textContent = formatCurrency(totalRecurringCost);
+        totalPeriodElement.textContent = periodText;
+        
+        // Add breakdown showing both recurring and one-time costs
+        const existingBreakdown = document.getElementById('costBreakdown');
+        if (existingBreakdown) {
+            existingBreakdown.remove();
+        }
+        
+        const breakdownElement = document.createElement('div');
+        breakdownElement.id = 'costBreakdown';
+        breakdownElement.className = 'cost-breakdown';
+        breakdownElement.innerHTML = `
+            <div class="cost-breakdown-item">
+                <span class="cost-label">Recurring Cost:</span>
+                <span class="cost-value">${formatCurrency(totalRecurringCost)}${periodText}</span>
+            </div>
+            <div class="cost-breakdown-item one-time">
+                <span class="cost-label">One-time Setup Fee:</span>
+                <span class="cost-value">${formatCurrency(totalSetupFee)}</span>
+            </div>
+            <div class="cost-breakdown-total">
+                <span class="cost-label">Total First Payment:</span>
+                <span class="cost-value">${formatCurrency(totalRecurringCost + totalSetupFee)}</span>
+            </div>
+        `;
+        
+        // Insert breakdown after the total cost display
+        const totalCostDiv = document.querySelector('.total-cost');
+        if (totalCostDiv) {
+            totalCostDiv.appendChild(breakdownElement);
+        }
+    } else {
+        // No setup fees, show regular cost
+        totalCostElement.textContent = formatCurrency(totalRecurringCost);
+        totalPeriodElement.textContent = periodText;
+        
+        // Remove any existing breakdown
+        const existingBreakdown = document.getElementById('costBreakdown');
+        if (existingBreakdown) {
+            existingBreakdown.remove();
+        }
+    }
     
     // Show/hide summary based on selection
     const summaryCard = document.querySelector('.total-summary');
@@ -314,15 +371,16 @@ function getPlanCostBreakdown(plan, userCount, isYearly) {
     
     switch (plan.pricing.type) {
         case 'base_with_additional':
+            let baseText = `${formatCurrency(plan.pricing[period])}${periodText}`;
             if (userCount > plan.pricing.includedUsers) {
-                const additionalUsers = userCount - plan.pricing.includedUsers;
-                return `${config.meta?.currency || '$'}${plan.pricing[period]}${periodText} base + ${additionalUsers} additional users`;
+            const additionalUsers = userCount - plan.pricing.includedUsers;
+            baseText += ` + ${additionalUsers} additional users`;
             }
-            return `${config.meta?.currency || '$'}${plan.pricing[period]}${periodText} for ${plan.pricing.includedUsers} users`;
+            return baseText;
         case 'per_user':
-            return `${config.meta?.currency || '$'}${plan.pricing[period]}${periodText} × ${userCount} users`;
+            return `${formatCurrency(plan.pricing[period])}${periodText} × ${userCount} users`;
         case 'flat_rate':
-            return `${config.meta?.currency || '$'}${plan.pricing[period]}${periodText} flat rate`;
+            return `${formatCurrency(plan.pricing[period])}${periodText} flat rate`;
         default:
             return '';
     }
@@ -415,7 +473,7 @@ function updatePricing() {
     
     config.plans.forEach(plan => {
         const priceElement = document.getElementById(`${plan.id}Price`);
-        const periodElement = document.getElementById(`${plan.id}Period`);
+        const currencyPeriodElement = document.getElementById(`${plan.id}CurrencyPeriod`);
         const totalPriceElement = document.getElementById(`${plan.id}TotalPrice`);
         const totalPeriodElement = document.getElementById(`${plan.id}TotalPeriod`);
         const additionalInfoElement = document.getElementById(`${plan.id}AdditionalInfo`);
@@ -443,7 +501,7 @@ function updatePricing() {
                 if (additionalInfoElement) {
                     const additionalCostKey = isYearly ? 'additionalUserCostYearly' : 'additionalUserCostMonthly';
                     const additionalPeriodText = isYearly ? '/user/year' : '/user/month';
-                    additionalInfoElement.textContent = `+${config.meta?.currency || '$'}${plan.pricing[additionalCostKey]}${additionalPeriodText} for additional users`;
+                    additionalInfoElement.textContent = `+${formatCurrency(plan.pricing[additionalCostKey])}${additionalPeriodText} for additional users`;
                 }
                 break;
                 
@@ -459,10 +517,16 @@ function updatePricing() {
                 break;
         }
         
-        // Update display
-        priceElement.textContent = formatPrice(displayPrice);
-        periodElement.textContent = displayPeriod;
-        totalPriceElement.textContent = formatPrice(totalCost);
+        // Update display with proper formatting
+        priceElement.textContent = formatCurrency(displayPrice);
+        
+        // Update period display
+        if (document.getElementById(`${plan.id}Period`)) {
+            document.getElementById(`${plan.id}Period`).textContent = displayPeriod;
+        }
+        
+        // Update total price
+        totalPriceElement.textContent = formatCurrency(totalCost);
         totalPeriodElement.textContent = periodText;
         
         // Update user info if element exists
@@ -475,9 +539,67 @@ function updatePricing() {
     updateTotalSummary();
 }
 
-// Format numbers with commas for better readability
-function formatPrice(price) {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+// Format numbers with proper localization
+function formatPrice(price, showCurrency = false) {
+    // Get locale from config or use browser default
+    const locale = config?.settings?.locale || navigator.language || 'en-US';
+    
+    if (showCurrency) {
+        // Format as currency with proper locale-specific formatting
+        const currency = config?.meta?.currency || 'USD';
+        const currencyCode = getCurrencyCode(currency);
+        
+        return new Intl.NumberFormat(locale, {
+            style: 'currency',
+            currency: currencyCode,
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(price);
+    } else {
+        // Format as number with locale-specific formatting
+        return new Intl.NumberFormat(locale, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(price);
+    }
+}
+
+// Helper function to get currency code from symbol
+function getCurrencyCode(currencySymbol) {
+    const currencyMap = {
+        '$': 'USD',
+        '€': 'EUR',
+        '£': 'GBP',
+        '¥': 'JPY',
+        '₹': 'INR',
+        '₽': 'RUB',
+        '₦': 'NGN',
+        '₨': 'PKR',
+        '₱': 'PHP',
+        '₩': 'KRW',
+        '₪': 'ILS',
+        '₫': 'VND',
+        'CHF': 'CHF',
+        'USD': 'USD',
+        'EUR': 'EUR',
+        'GBP': 'GBP'
+    };
+    
+    return currencyMap[currencySymbol] || 'USD';
+}
+
+// Format currency using browser locale (for proper symbol placement)
+function formatCurrency(amount, currencySymbol = null) {
+    const locale = config?.settings?.locale || navigator.language || 'en-US';
+    const currency = currencySymbol || config?.meta?.currency || 'USD';
+    const currencyCode = getCurrencyCode(currency);
+    
+    return new Intl.NumberFormat(locale, {
+        style: 'currency',
+        currency: currencyCode,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(amount);
 }
 
 // Add animation effects
@@ -544,3 +666,5 @@ function updateUserInfoDisplays() {
         }
     });
 }
+
+// Toggle billing period

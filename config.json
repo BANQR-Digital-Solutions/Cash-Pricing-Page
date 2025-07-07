@@ -17,19 +17,21 @@
         "includedUsers": 3,
         "additionalUserCostMonthly": 9.90,
         "additionalUserCostYearly": 99,
-        "type": "base_with_additional"
+        "type": "base_with_additional",
+        "setupFee": 0
       }
     },
     {
       "id": "multi",
       "name": "Add-On: Multi-Bank Integration",
       "description": "add connectivity to over 9,200 banks",
-      "popular": true,
+      "popular": false,
       "mandatory": false,
       "pricing": {
         "monthly": 50,
         "yearly": 500,
-        "type": "flat_rate"
+        "type": "flat_rate",
+        "setupFee": 0
       }
     },
     {
@@ -41,7 +43,8 @@
       "pricing": {
         "monthly": 150,
         "yearly": 1500,
-        "type": "flat_rate"
+        "type": "flat_rate",
+        "setupFee": 550
       }
     },
     {
@@ -53,7 +56,8 @@
       "pricing": {
         "monthly": 5,
         "yearly": 50,
-        "type": "per_user"
+        "type": "per_user",
+        "setupFee": 0
       }
     }
   ],
@@ -291,6 +295,7 @@
     "minUserCount": 1,
     "maxUserCount": 1000,
     "yearlyDiscount": "Save 2 months",
-    "showYearlyDiscount": true
+    "showYearlyDiscount": true,
+    "locale": "de-DE"
   }
 }
