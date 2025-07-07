@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Choose Your Plan</h1>
+            <p>Find the perfect plan for your team</p>
+        </header>
+
+        <div class="pricing-controls">
+            <div class="billing-toggle">
+                <div class="toggle-controls">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="billingToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <div class="toggle-text">
+                        <span id="monthlyText" class="active">Monthly</span>
+                        <span id="yearlyText">Yearly</span>
+                    </div>
+                </div>
+                <div class="yearly-discount" id="yearlyDiscount" style="display: none;">
+                    <span class="discount-text">Save 2 months</span>
+                </div>
+            </div>
+            
+            <div class="user-input">
+                <label for="userCount">Number of Users:</label>
+                <input type="number" id="userCount" min="1" value="5" placeholder="Enter number of users">
+            </div>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Pricing cards will be dynamically generated here -->
+        </div>
+        
+        <div class="total-summary">
+            <div class="summary-card">
+                <h3>Your Selected Plans</h3>
+                <div class="selected-plans-list" id="selectedPlansList">
+                    <!-- Selected plans will be listed here -->
+                </div>
+                <div class="total-cost">
+                    <h4>Total Cost: <span id="totalCost">$0</span><span id="totalPeriod">/month</span></h4>
+                    <p class="user-count-summary">For <span id="userCountSummary">5</span> users</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-comparison">
+            <!-- Comparison table will be dynamically generated here -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
