@@ -1,13 +1,13 @@
 {
   "meta": {
-    "title": "Combine your Cash 365 Environment",
+    "title": "Cash 365 License configuration",
     "subtitle": "BANQR Digital Solutions GmbH",
     "currency": "€"
   },
   "plans": [
     {
       "id": "base",
-      "name": "Cash License",
+      "name": "Cash 365",
       "description": "Perfect for small teams getting started",
       "popular": false,
       "mandatory": true,
@@ -24,8 +24,8 @@
     {
       "id": "multi",
       "name": "Add-On: Multi-Bank Integration",
-      "description": "add connectivity to over 9,200 banks",
-      "popular": false,
+      "description": "connectivity to over 9,200 banks",
+      "popular": true,
       "mandatory": false,
       "pricing": {
         "monthly": 50,
@@ -37,7 +37,7 @@
     {
       "id": "db",
       "name": "Add-On: Deutsche Bank Enterprise Connector",
-      "description": "add exclusive features for Deutsche Bank enterprise customers",
+      "description": "exclusive features for Deutsche Bank enterprise customers",
       "popular": false,
       "mandatory": false,
       "pricing": {
@@ -62,7 +62,7 @@
     }
   ],
   "comparisonTable": {
-    "title": "Feature Comparison",
+    "title": "Features",
     "rows": [
       {
         "feature": "License Type",
@@ -82,212 +82,47 @@
         "feature": "Real-time Transactions",
         "base": "✓",
         "multi": "✓",
-        "db": "✓ Enhanced",
-        "pos": "✓"
+        "db": "✓",
+        "pos": "-"
       },
       {
-        "feature": "Cash Flow Analytics",
-        "base": "Basic",
-        "multi": "Advanced",
-        "db": "Enterprise",
-        "pos": "Basic"
-      },
-      {
-        "feature": "API Access",
-        "base": "Limited",
-        "multi": "Full REST API",
-        "db": "Enterprise API",
-        "pos": "Payment API"
-      },
-      {
-        "feature": "Support Level",
-        "base": "Standard",
-        "multi": "Priority",
-        "db": "Dedicated",
-        "pos": "Standard"
-      },
-      {
-        "feature": "Data Export",
-        "base": "CSV",
-        "multi": "CSV, Excel, PDF",
-        "db": "All formats + Custom",
-        "pos": "CSV, Excel"
-      },
-      {
-        "feature": "Mobile App",
+        "feature": "Instant Payments",
         "base": "✓",
         "multi": "✓",
-        "db": "✓ Enterprise",
-        "pos": "✓ QR Scanner"
+        "db": "✓",
+        "pos": "-"
       },
       {
-        "feature": "Reporting",
-        "base": "Standard",
-        "multi": "Advanced",
-        "db": "Custom Reports",
-        "pos": "Payment Reports"
+        "feature": "Bank Account Reconciliation",
+        "base": "✓",
+        "multi": "✓",
+        "db": "✓",
+        "pos": "-"
       },
       {
-        "feature": "Security",
-        "base": "2FA",
-        "multi": "2FA + Encryption",
-        "db": "Enterprise Security",
-        "pos": "PCI Compliant"
+        "feature": "Batch Payments",
+        "base": "✗",
+        "multi": "✗",
+        "db": "✓",
+        "pos": "-"
       },
       {
-        "feature": "Integration Options",
-        "base": "Basic",
-        "multi": "Webhooks",
-        "db": "Enterprise Connectors",
-        "pos": "POS Systems"
+        "feature": "Virtual Accounts",
+        "base": "✗",
+        "multi": "✗",
+        "db": "✓",
+        "pos": "-"
       },
       {
-        "feature": "Transaction History",
-        "base": "6 months",
-        "multi": "Unlimited",
-        "db": "Unlimited + Archive",
-        "pos": "12 months"
-      },
-      {
-        "feature": "Automated Reconciliation",
-        "base": "Basic",
-        "multi": "✓ Advanced",
-        "db": "✓ Enterprise",
-        "pos": "Payment matching"
-      },
-      {
-        "feature": "Multi-Currency Support",
-        "base": "EUR only",
-        "multi": "50+ currencies",
-        "db": "All major currencies",
-        "pos": "Local currency"
-      },
-      {
-        "feature": "Bulk Transaction Processing",
-        "base": "100/day",
-        "multi": "Unlimited",
-        "db": "Unlimited + Priority",
-        "pos": "500/day"
-      },
-      {
-        "feature": "Custom Dashboard",
-        "base": "Standard",
-        "multi": "✓ Customizable",
-        "db": "✓ White-label",
-        "pos": "Payment focused"
-      },
-      {
-        "feature": "Compliance Monitoring",
-        "base": "Basic",
-        "multi": "AML/KYC",
-        "db": "Enterprise compliance",
-        "pos": "Payment compliance"
-      },
-      {
-        "feature": "Data Retention",
-        "base": "2 years",
-        "multi": "7 years",
-        "db": "Unlimited",
-        "pos": "5 years"
-      },
-      {
-        "feature": "Notification System",
-        "base": "Email",
-        "multi": "Email, SMS, Push",
-        "db": "All channels + Custom",
-        "pos": "Payment alerts"
-      },
-      {
-        "feature": "Role-based Access",
-        "base": "3 roles",
-        "multi": "Unlimited roles",
-        "db": "Enterprise permissions",
-        "pos": "Basic roles"
-      },
-      {
-        "feature": "Audit Trail",
-        "base": "Basic logging",
-        "multi": "✓ Complete",
-        "db": "✓ Enhanced + Compliance",
-        "pos": "Payment logs"
-      },
-      {
-        "feature": "Fraud Detection",
-        "base": "Basic alerts",
-        "multi": "✓ AI-powered",
-        "db": "✓ Enterprise ML",
-        "pos": "Transaction monitoring"
-      },
-      {
-        "feature": "Backup & Recovery",
-        "base": "Weekly",
-        "multi": "Daily + Point-in-time",
-        "db": "Real-time + Geo-redundant",
-        "pos": "Daily"
-      },
-      {
-        "feature": "Customer Support Hours",
-        "base": "9-5 CET",
-        "multi": "24/5",
-        "db": "24/7 + Dedicated",
-        "pos": "9-5 CET"
-      },
-      {
-        "feature": "Training & Onboarding",
-        "base": "Self-service",
-        "multi": "Video tutorials",
-        "db": "Dedicated training",
-        "pos": "Quick start guide"
-      },
-      {
-        "feature": "SLA Guarantee",
-        "base": "99.5%",
-        "multi": "99.9%",
-        "db": "99.99% + Credits",
-        "pos": "99.5%"
-      },
-      {
-        "feature": "Data Encryption",
-        "base": "AES-256",
-        "multi": "AES-256 + TLS 1.3",
-        "db": "End-to-end + HSM",
-        "pos": "PCI DSS Level 1"
-      },
-      {
-        "feature": "Third-party Integrations",
-        "base": "5 apps",
-        "multi": "50+ apps",
-        "db": "Unlimited + Custom",
-        "pos": "Payment processors"
-      },
-      {
-        "feature": "Scheduled Reports",
-        "base": "Manual",
-        "multi": "✓ Automated",
-        "db": "✓ Custom schedules",
-        "pos": "Payment summaries"
-      },
-      {
-        "feature": "Account Limits",
-        "base": "10 accounts",
-        "multi": "1,000 accounts",
-        "db": "Unlimited",
-        "pos": "50 accounts"
-      },
-      {
-        "feature": "Cash Flow Forecasting",
-        "base": "7 days",
-        "multi": "90 days + Trends",
-        "db": "1 year + ML insights",
-        "pos": "30 days"
-      },
-      {
-        "feature": "White Labeling",
-        "base": "—",
-        "multi": "Logo only",
-        "db": "✓ Full branding",
-        "pos": "—"
+        "feature": "Receive Payments via QR Code",
+        "base": "✗",
+        "multi": "✗",
+        "db": "✗",
+        "pos": "✓"
       }
+
+      
+
     ]
   },
   "settings": {
