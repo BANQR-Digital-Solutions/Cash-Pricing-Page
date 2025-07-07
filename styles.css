@@ -12,6 +12,8 @@
     --accent-green-dark: #059669;
     --accent-orange: #f59e0b;
     --accent-red: #ef4444;
+    --accent-purple: #8b5cf6;
+    --accent-purple-dark: #7c3aed;
     
     /* Neutral Colors - Corporate text hierarchy */
     --text-primary: #1f2937;
@@ -36,6 +38,7 @@
     --shadow-medium: rgba(15, 23, 42, 0.12);
     --shadow-primary: rgba(30, 58, 138, 0.15);
     --shadow-green: rgba(16, 185, 129, 0.2);
+    --shadow-purple: rgba(139, 92, 246, 0.25);
     
     /* Gradient Backgrounds - Professional banking gradients */
     --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
@@ -43,6 +46,7 @@
     --gradient-card: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     --gradient-selected: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     --gradient-green: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dark) 100%);
+    --gradient-purple: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-purple-dark) 100%);
     --gradient-total: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     
     /* Info Box Colors - Professional info styling */
@@ -219,14 +223,14 @@ input:checked + .toggle-slider:before {
 }
 
 .pricing-card.popular {
-    border: 3px solid var(--accent-green);
+    border: 3px solid var(--accent-purple);
 }
 
 .popular-badge {
     position: absolute;
     top: 20px;
     right: -35px;
-    background: var(--accent-green);
+    background: var(--accent-purple);
     color: var(--white);
     padding: 8px 40px;
     font-size: 0.8em;
@@ -245,7 +249,7 @@ input:checked + .toggle-slider:before {
 }
 
 .pricing-card.popular .plan-header {
-    background: var(--gradient-green);
+    background: var(--gradient-purple);
     color: var(--white);
 }
 
