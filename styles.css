@@ -1,57 +1,58 @@
 /* Color Scheme Variables - Edit these to change the entire color scheme */
+/* Banqr-inspired Professional Banking Color Palette */
 :root {
-    /* Primary Colors */
-    --primary-color: #667eea;
-    --primary-dark: #5a6fd8;
-    --secondary-color: #764ba2;
-    --secondary-dark: #6a4190;
+    /* Primary Colors - Deep blue banking theme */
+    --primary-color: #1e3a8a;
+    --primary-dark: #1e2a5a;
+    --secondary-color: #3b82f6;
+    --secondary-dark: #2563eb;
     
-    /* Accent Colors */
-    --accent-green: #4CAF50;
-    --accent-green-dark: #45a049;
-    --accent-orange: #ff9800;
-    --accent-red: #dc3545;
+    /* Accent Colors - Professional fintech palette */
+    --accent-green: #10b981;
+    --accent-green-dark: #059669;
+    --accent-orange: #f59e0b;
+    --accent-red: #ef4444;
     
-    /* Neutral Colors */
-    --text-primary: #333;
-    --text-secondary: #555;
-    --text-muted: #666;
-    --text-light: #6c757d;
+    /* Neutral Colors - Corporate text hierarchy */
+    --text-primary: #1f2937;
+    --text-secondary: #4b5563;
+    --text-muted: #6b7280;
+    --text-light: #9ca3af;
     --white: #ffffff;
     
-    /* Background Colors */
-    --bg-light: #f8f9fa;
-    --bg-lighter: #f9f9f9;
+    /* Background Colors - Clean professional backgrounds */
+    --bg-light: #f8fafc;
+    --bg-lighter: #f1f5f9;
     --bg-card: #ffffff;
-    --bg-selected: #f8f9ff;
+    --bg-selected: #eff6ff;
     
-    /* Border Colors */
-    --border-light: #eee;
-    --border-medium: #e9ecef;
-    --border-dark: #dee2e6;
+    /* Border Colors - Subtle professional borders */
+    --border-light: #e2e8f0;
+    --border-medium: #cbd5e1;
+    --border-dark: #94a3b8;
     
-    /* Shadow Colors */
-    --shadow-light: rgba(0, 0, 0, 0.1);
-    --shadow-medium: rgba(0, 0, 0, 0.15);
-    --shadow-primary: rgba(102, 126, 234, 0.2);
-    --shadow-green: rgba(76, 175, 80, 0.3);
+    /* Shadow Colors - Professional depth */
+    --shadow-light: rgba(15, 23, 42, 0.08);
+    --shadow-medium: rgba(15, 23, 42, 0.12);
+    --shadow-primary: rgba(30, 58, 138, 0.15);
+    --shadow-green: rgba(16, 185, 129, 0.2);
     
-    /* Gradient Backgrounds */
+    /* Gradient Backgrounds - Professional banking gradients */
     --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     --gradient-primary-hover: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
-    --gradient-card: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --gradient-card: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     --gradient-selected: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     --gradient-green: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dark) 100%);
     --gradient-total: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     
-    /* Info Box Colors */
-    --info-bg: rgba(102, 126, 234, 0.1);
-    --info-border: rgba(102, 126, 234, 0.2);
-    --info-bg-selected: rgba(102, 126, 234, 0.15);
-    --info-border-selected: rgba(102, 126, 234, 0.3);
+    /* Info Box Colors - Professional info styling */
+    --info-bg: rgba(30, 58, 138, 0.06);
+    --info-border: rgba(30, 58, 138, 0.15);
+    --info-bg-selected: rgba(30, 58, 138, 0.1);
+    --info-border-selected: rgba(30, 58, 138, 0.25);
     
-    /* Toggle Colors */
-    --toggle-inactive: #ccc;
+    /* Toggle Colors - Professional toggle styling */
+    --toggle-inactive: #cbd5e1;
     --toggle-active: var(--accent-green);
 }
 
@@ -598,7 +599,7 @@ input:checked + .toggle-slider:before {
 }
 
 .total-setup-fee h4 {
-    color: #495057;
+    color: var(--text-secondary);
     font-size: 1.1em;
     margin: 0;
 }
