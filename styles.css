@@ -1,3 +1,60 @@
+/* Color Scheme Variables - Edit these to change the entire color scheme */
+:root {
+    /* Primary Colors */
+    --primary-color: #667eea;
+    --primary-dark: #5a6fd8;
+    --secondary-color: #764ba2;
+    --secondary-dark: #6a4190;
+    
+    /* Accent Colors */
+    --accent-green: #4CAF50;
+    --accent-green-dark: #45a049;
+    --accent-orange: #ff9800;
+    --accent-red: #dc3545;
+    
+    /* Neutral Colors */
+    --text-primary: #333;
+    --text-secondary: #555;
+    --text-muted: #666;
+    --text-light: #6c757d;
+    --white: #ffffff;
+    
+    /* Background Colors */
+    --bg-light: #f8f9fa;
+    --bg-lighter: #f9f9f9;
+    --bg-card: #ffffff;
+    --bg-selected: #f8f9ff;
+    
+    /* Border Colors */
+    --border-light: #eee;
+    --border-medium: #e9ecef;
+    --border-dark: #dee2e6;
+    
+    /* Shadow Colors */
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+    --shadow-primary: rgba(102, 126, 234, 0.2);
+    --shadow-green: rgba(76, 175, 80, 0.3);
+    
+    /* Gradient Backgrounds */
+    --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    --gradient-primary-hover: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+    --gradient-card: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --gradient-selected: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    --gradient-green: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dark) 100%);
+    --gradient-total: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    
+    /* Info Box Colors */
+    --info-bg: rgba(102, 126, 234, 0.1);
+    --info-border: rgba(102, 126, 234, 0.2);
+    --info-bg-selected: rgba(102, 126, 234, 0.15);
+    --info-border-selected: rgba(102, 126, 234, 0.3);
+    
+    /* Toggle Colors */
+    --toggle-inactive: #ccc;
+    --toggle-active: var(--accent-green);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -7,8 +64,8 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--text-primary);
+    background: var(--gradient-primary);
     min-height: 100vh;
 }
 
@@ -21,7 +78,7 @@ body {
 header {
     text-align: center;
     margin-bottom: 40px;
-    color: white;
+    color: var(--white);
 }
 
 header h1 {
@@ -77,7 +134,7 @@ header p {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: var(--toggle-inactive);
     transition: 0.4s;
     border-radius: 34px;
 }
@@ -89,13 +146,13 @@ header p {
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: var(--white);
     transition: 0.4s;
     border-radius: 50%;
 }
 
 input:checked + .toggle-slider {
-    background-color: #4CAF50;
+    background-color: var(--toggle-active);
 }
 
 input:checked + .toggle-slider:before {
@@ -105,7 +162,7 @@ input:checked + .toggle-slider:before {
 .toggle-text {
     display: flex;
     gap: 20px;
-    color: white;
+    color: var(--white);
     font-weight: 500;
 }
 
@@ -123,7 +180,7 @@ input:checked + .toggle-slider:before {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: white;
+    color: var(--white);
     font-weight: 500;
 }
 
@@ -144,9 +201,9 @@ input:checked + .toggle-slider:before {
 }
 
 .pricing-card {
-    background: white;
+    background: var(--bg-card);
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px var(--shadow-light);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
@@ -157,19 +214,19 @@ input:checked + .toggle-slider:before {
 
 .pricing-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 20px 40px var(--shadow-medium);
 }
 
 .pricing-card.popular {
-    border: 3px solid #4CAF50;
+    border: 3px solid var(--accent-green);
 }
 
 .popular-badge {
     position: absolute;
     top: 20px;
     right: -35px;
-    background: #4CAF50;
-    color: white;
+    background: var(--accent-green);
+    color: var(--white);
     padding: 8px 40px;
     font-size: 0.8em;
     font-weight: 700;
@@ -180,15 +237,15 @@ input:checked + .toggle-slider:before {
 .plan-header {
     padding: 25px 20px 20px;
     text-align: center;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: var(--gradient-card);
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
 .pricing-card.popular .plan-header {
-    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-    color: white;
+    background: var(--gradient-green);
+    color: var(--white);
 }
 
 .plan-header h3 {
@@ -250,7 +307,7 @@ input:checked + .toggle-slider:before {
 .features h4 {
     margin-bottom: 20px;
     font-size: 1.2em;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .features ul {
@@ -266,13 +323,13 @@ input:checked + .toggle-slider:before {
 }
 
 .checkmark {
-    color: #4CAF50;
+    color: var(--accent-green);
     font-weight: 700;
     font-size: 1.2em;
 }
 
 .cross {
-    color: #ccc;
+    color: var(--toggle-inactive);
     font-weight: 700;
     font-size: 1.2em;
 }
@@ -281,7 +338,7 @@ input:checked + .toggle-slider:before {
     padding: 0 20px 20px;
     text-align: center;
     font-size: 1.2em;
-    color: #4CAF50;
+    color: var(--accent-green);
     border-top: 2px solid #f0f0f0;
     padding-top: 20px;
     margin-top: auto;
@@ -290,8 +347,8 @@ input:checked + .toggle-slider:before {
 .cta-button {
     width: 100%;
     padding: 15px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: var(--gradient-primary);
+    color: var(--white);
     border: none;
     font-size: 1.1em;
     font-weight: 600;
@@ -300,13 +357,13 @@ input:checked + .toggle-slider:before {
 }
 
 .cta-button:hover {
-    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    background: var(--gradient-primary-hover);
 }
 
 .feature-comparison {
-    background: white;
+    background: var(--bg-card);
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px var(--shadow-light);
     padding: 40px;
     margin-top: 40px;
 }
@@ -315,7 +372,7 @@ input:checked + .toggle-slider:before {
     text-align: center;
     margin-bottom: 30px;
     font-size: 2em;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .comparison-table {
@@ -332,18 +389,18 @@ input:checked + .toggle-slider:before {
 .comparison-table td {
     padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-light);
 }
 
 .comparison-table th {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: var(--gradient-card);
     font-weight: 700;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .comparison-table td:first-child {
     font-weight: 600;
-    color: #555;
+    color: var(--text-secondary);
 }
 
 .comparison-table td:not(:first-child) {
@@ -369,7 +426,7 @@ input:checked + .toggle-slider:before {
     height: 20px;
     margin-right: 10px;
     cursor: pointer;
-    accent-color: #667eea;
+    accent-color: var(--primary-color);
 }
 
 .plan-checkbox:disabled {
@@ -394,30 +451,30 @@ input:checked + .toggle-slider:before {
     position: absolute;
     top: 15px;
     right: 15px;
-    background: #ff9800;
-    color: white;
+    background: var(--accent-orange);
+    color: var(--white);
     padding: 6px 12px;
     font-size: 0.75em;
     font-weight: 600;
     border-radius: 12px;
     z-index: 10;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--shadow-light);
 }
 
 .pricing-card.selected {
-    border: 3px solid #667eea;
-    background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+    border: 3px solid var(--primary-color);
+    background: var(--gradient-selected);
+    box-shadow: 0 10px 30px var(--shadow-primary);
 }
 
 .pricing-card.selected .plan-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: var(--gradient-selected);
+    color: var(--white);
 }
 
 .additional-info {
     font-size: 0.9em;
-    color: #333;
+    color: var(--text-primary);
     margin-top: 5px;
     font-weight: 500;
     line-height: 1.4;
@@ -431,10 +488,10 @@ input:checked + .toggle-slider:before {
 .additional-cost-info {
     margin-top: 10px;
     padding: 12px;
-    background-color: rgba(102, 126, 234, 0.1);
+    background-color: var(--info-bg);
     border-radius: 6px;
-    border-left: 3px solid #667eea;
-    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-left: 3px solid var(--primary-color);
+    border: 1px solid var(--info-border);
     min-height: 44px; /* Ensure consistent height */
     display: flex;
     align-items: center;
@@ -447,22 +504,22 @@ input:checked + .toggle-slider:before {
 }
 
 .pricing-card.selected .additional-info {
-    color: #333;
+    color: var(--text-primary);
     font-weight: 600;
 }
 
 .pricing-card.selected .additional-cost-info {
-    background-color: rgba(102, 126, 234, 0.15);
-    border-color: rgba(102, 126, 234, 0.3);
+    background-color: var(--info-bg-selected);
+    border-color: var(--info-border-selected);
 }
 
 /* Cost Breakdown Styles */
 .cost-breakdown {
     margin-top: 12px;
     padding: 12px;
-    background-color: #f8f9fa;
+    background-color: var(--bg-light);
     border-radius: 8px;
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--border-medium);
 }
 
 .cost-breakdown-item {
@@ -474,7 +531,7 @@ input:checked + .toggle-slider:before {
 }
 
 .cost-breakdown-item.one-time {
-    color: #dc3545;
+    color: var(--accent-red);
     font-weight: 500;
 }
 
@@ -484,28 +541,28 @@ input:checked + .toggle-slider:before {
     align-items: center;
     padding: 8px 0 4px 0;
     margin-top: 8px;
-    border-top: 1px solid #dee2e6;
+    border-top: 1px solid var(--border-dark);
     font-weight: 600;
     font-size: 1em;
 }
 
 .cost-breakdown .cost-label {
-    color: #6c757d;
+    color: var(--text-light);
 }
 
 .cost-breakdown .cost-value {
-    color: #333;
+    color: var(--text-primary);
     font-weight: 500;
 }
 
 .cost-breakdown-total .cost-label,
 .cost-breakdown-total .cost-value {
-    color: #333;
+    color: var(--text-primary);
     font-weight: 600;
 }
 
 .cost-breakdown small {
-    color: #6c757d;
+    color: var(--text-light);
     line-height: 1.4;
 }
 
@@ -513,31 +570,31 @@ input:checked + .toggle-slider:before {
 .setup-fee-info {
     margin-top: 10px;
     padding: 8px 12px;
-    background-color: #f8f9fa;
+    background-color: var(--bg-light);
     border-radius: 6px;
     text-align: center;
 }
 
 .setup-fee {
     font-size: 0.9em;
-    color: #666;
+    color: var(--text-muted);
     font-weight: 500;
 }
 
 .setup-fee-breakdown {
     display: block;
     margin-top: 4px;
-    color: #666;
+    color: var(--text-muted);
     font-style: italic;
 }
 
 .total-setup-fee {
     margin-top: 15px;
     padding: 10px 15px;
-    background-color: #f8f9fa;
+    background-color: var(--bg-light);
     border-radius: 8px;
     text-align: center;
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--border-medium);
 }
 
 .total-setup-fee h4 {
@@ -556,9 +613,9 @@ input:checked + .toggle-slider:before {
 
 /* Total Summary Styles */
 .total-summary {
-    background: white;
+    background: var(--bg-card);
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px var(--shadow-light);
     margin-bottom: 40px;
     display: none;
 }
@@ -569,7 +626,7 @@ input:checked + .toggle-slider:before {
 
 .summary-card h3 {
     margin-bottom: 20px;
-    color: #333;
+    color: var(--text-primary);
     font-size: 1.5em;
 }
 
@@ -579,10 +636,10 @@ input:checked + .toggle-slider:before {
 
 .selected-plan-item {
     padding: 15px;
-    border: 1px solid #eee;
+    border: 1px solid var(--border-light);
     border-radius: 8px;
     margin-bottom: 10px;
-    background: #f9f9f9;
+    background: var(--bg-lighter);
 }
 
 .selected-plan-item:last-child {
@@ -599,25 +656,25 @@ input:checked + .toggle-slider:before {
 .plan-name {
     font-weight: 600;
     font-size: 1.1em;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .plan-cost {
     font-weight: 700;
-    color: #667eea;
+    color: var(--primary-color);
     font-size: 1.1em;
 }
 
 .plan-item-details {
-    color: #666;
+    color: var(--text-muted);
     font-size: 0.9em;
 }
 
 .total-cost {
     text-align: center;
     padding: 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: var(--gradient-total);
+    color: var(--white);
     border-radius: 10px;
 }
 
@@ -640,13 +697,13 @@ input:checked + .toggle-slider:before {
 }
 
 .discount-text {
-    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-    color: white;
+    background: var(--gradient-green);
+    color: var(--white);
     padding: 4px 12px;
     border-radius: 15px;
     font-size: 0.85em;
     font-weight: 600;
-    box-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
+    box-shadow: 0 2px 10px var(--shadow-green);
     animation: pulse 2s infinite;
 }
 
