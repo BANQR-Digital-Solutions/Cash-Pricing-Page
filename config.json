@@ -93,6 +93,20 @@
         "pos": "-"
       },
       {
+        "feature": "Direct Debit",
+        "base": "✗",
+        "multi": "✗",
+        "db": "✓",
+        "pos": "-"
+      }
+      {
+        "feature": "Embedded Verifiaction of Payee",
+        "base": "✗",
+        "multi": "✓",
+        "db": "✓",
+        "pos": "-"
+      },
+      {
         "feature": "Bank Account Reconciliation",
         "base": "✓",
         "multi": "✓",
@@ -102,7 +116,7 @@
       {
         "feature": "Batch Payments",
         "base": "✗",
-        "multi": "✗",
+        "multi": "✓",
         "db": "✓",
         "pos": "-"
       },
@@ -119,10 +133,42 @@
         "multi": "✗",
         "db": "✗",
         "pos": "✓"
+      },
+      {
+        "feature": "Camt.053/52 Import&Export",
+        "base": "✗",
+        "multi": "✗",
+        "db": "✓",
+        "pos": "-"
+      },
+      {
+        "feature": "PAIN001 Ipomrt&Export",
+        "base": "✗",
+        "multi": "✓",
+        "db": "✓",
+        "pos": "-"
+      },
+      {
+        "feature": "Global RealTime Account Information",
+        "base": "✗",
+        "multi": "✗",
+        "db": "✓",
+        "pos": "-"
+      },
+      {
+        "feature": "Multibank Account API",
+        "base": "✗",
+        "multi": "✓",
+        "db": "✓",
+        "pos": "-"
+      },      
+      {
+        "feature": "Multibank Payment API",
+        "base": "✗",
+        "multi": "✗",
+        "db": "✓",
+        "pos": "-"
       }
-
-      
-
     ]
   },
   "settings": {
