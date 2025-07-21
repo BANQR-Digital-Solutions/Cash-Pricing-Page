@@ -98,9 +98,9 @@
         "multi": "✗",
         "db": "✓",
         "pos": "-"
-      }
+      },
       {
-        "feature": "Embedded Verifiaction of Payee",
+        "feature": "Embedded Verification of Payee",
         "base": "✗",
         "multi": "✓",
         "db": "✓",
@@ -142,7 +142,7 @@
         "pos": "-"
       },
       {
-        "feature": "PAIN001 Ipomrt&Export",
+        "feature": "PAIN001 Import&Export",
         "base": "✗",
         "multi": "✓",
         "db": "✓",
